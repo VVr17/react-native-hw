@@ -64,56 +64,82 @@ export const RegistrationScreen = () => {
             <View
               style={{
                 ...styles.form,
-                // marginBottom: isKeyboardShown ? 20 : 100,
+                paddingBottom: isKeyboardShown ? 32 : 45,
               }}
             >
+              <View style={styles.imageWrapper}></View>
+
               <View style={styles.title}>
                 <Text style={styles.titleText}>Регистрация</Text>
               </View>
 
-              <TextInput
-                style={styles.input}
-                onChangeText={onLoginChange}
-                value={login}
-                onFocus={onInputFocus}
-                placeholder="Login"
-                placeholderTextColor={theme.colors.placeholder}
-              />
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={onLoginChange}
+                  value={login}
+                  onFocus={onInputFocus}
+                  placeholder="Логин"
+                  placeholderTextColor={theme.colors.placeholder}
+                />
+              </View>
 
-              <TextInput
-                style={styles.input}
-                onChangeText={onEmailChange}
-                value={email}
-                onFocus={onInputFocus}
-                placeholder="Email"
-                placeholderTextColor={theme.colors.placeholder}
-              />
+              <View style={styles.inputWrapper}>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={onEmailChange}
+                  value={email}
+                  onFocus={onInputFocus}
+                  placeholder="Адрес электронной почты"
+                  placeholderTextColor={theme.colors.placeholder}
+                />
+              </View>
 
-              <TextInput
-                style={{ ...styles.input, marginBottom: 43 }}
-                onChangeText={onPasswordChange}
-                value={password}
-                onFocus={onInputFocus}
-                secureTextEntry={true}
-                placeholder="password"
-                placeholderTextColor={theme.colors.placeholder}
-              />
-
-              <TouchableOpacity
-                style={styles.button}
-                activeOpacity={0.6}
-                onPress={onSubmit}
+              <View
+                style={{
+                  ...styles.inputWrapper,
+                  marginBottom: isKeyboardShown ? 0 : 43,
+                }}
               >
-                <Text style={styles.buttonTitle}>Зарегистрироваться</Text>
-              </TouchableOpacity>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={onPasswordChange}
+                  value={password}
+                  onFocus={onInputFocus}
+                  secureTextEntry={true}
+                  placeholder="Пароль"
+                  placeholderTextColor={theme.colors.placeholder}
+                />
+                <TouchableOpacity
+                  style={{ ...styles.extraButton, ...styles.inputButton }}
+                  activeOpacity={0.6}
+                  // onPress={onSubmit}
+                >
+                  <Text style={styles.extraButtonText}>Показать</Text>
+                </TouchableOpacity>
+              </View>
 
-              <TouchableOpacity
-                style={styles.link}
-                activeOpacity={0.6}
-                onPress={onSubmit}
-              >
-                <Text style={styles.linkText}>Уже есть аккаунт? Войти</Text>
-              </TouchableOpacity>
+              {!isKeyboardShown && (
+                <>
+                  <TouchableOpacity
+                    style={styles.button}
+                    activeOpacity={0.6}
+                    onPress={onSubmit}
+                  >
+                    <Text style={styles.buttonTitle}>Зарегистрироваться</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity
+                    style={styles.extraButton}
+                    activeOpacity={0.6}
+                    onPress={onSubmit}
+                  >
+                    <Text style={styles.extraButtonText}>
+                      Уже есть аккаунт? Войти
+                    </Text>
+                  </TouchableOpacity>
+                </>
+              )}
             </View>
           </KeyboardAvoidingView>
         </ImageBackground>
@@ -132,12 +158,23 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
 
+  imageWrapper: {
+    position: "absolute",
+    top: -50,
+    left: 140,
+
+    width: 120,
+    height: 120,
+    backgroundColor: `${theme.colors.inputBackground}`,
+    borderRadius: 16,
+  },
+
   form: {
+    position: "relative",
     backgroundColor: `${theme.colors.mainBackground}`,
     borderTopLeftRadius: 25,
     borderTopEndRadius: 25,
     paddingHorizontal: 16,
-    paddingBottom: 45,
     paddingTop: 92,
   },
 
@@ -150,14 +187,24 @@ const styles = StyleSheet.create({
     // fontWeight: 500,
   },
 
+  inputWrapper: {
+    marginBottom: 16,
+    position: "relative",
+  },
+
   input: {
     borderWidth: 1,
     padding: 16,
     borderRadius: 8,
-    marginBottom: 16,
     fontSize: 16,
     backgroundColor: `${theme.colors.inputBackground}`,
     borderColor: `${theme.colors.border}`,
+  },
+
+  inputButton: {
+    position: "absolute",
+    top: 19,
+    right: 16,
   },
 
   button: {
@@ -173,12 +220,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
-  link: {
+  extraButton: {
     backgroundColor: "transparent",
   },
 
-  linkText: {
-    color: `${theme.colors.secondaryText}`,
+  extraButtonText: {
+    color: `${theme.colors.secondaryAccent}`,
     textAlign: "center",
     fontSize: 16,
   },
