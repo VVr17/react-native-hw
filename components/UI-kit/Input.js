@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { TextInput, View, StyleSheet, Text } from "react-native";
 import { theme } from "../../constants/theme";
 import { ExtraButton } from "../ExtraButton";
@@ -12,6 +13,13 @@ export const Input = ({
   isPassword = false,
   isLast = false,
 }) => {
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => {
+    onInputFocus();
+    setIsFocused(true);
+  };
+
   return (
     <View
       style={{
@@ -21,10 +29,16 @@ export const Input = ({
       }}
     >
       <TextInput
-        style={styles.input}
+        style={{
+          ...styles.input,
+          borderColor: isFocused
+            ? `${theme.colors.accent}`
+            : `${theme.colors.border}`,
+        }}
         onChangeText={onInputChange}
         value={value}
-        onFocus={onInputFocus}
+        onFocus={handleFocus}
+        onBlur={() => setIsFocused(false)}
         secureTextEntry={isPassword}
         placeholder={placeholder}
         placeholderTextColor={theme.colors.placeholder}
@@ -48,7 +62,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontSize: 16,
     backgroundColor: `${theme.colors.inputBackground}`,
-    borderColor: `${theme.colors.border}`,
+    // borderColor: `${theme.colors.border}`,
     fontFamily: "Roboto-Regular",
   },
 
