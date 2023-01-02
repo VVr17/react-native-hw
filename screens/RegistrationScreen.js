@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Keyboard } from "react-native";
+import { Keyboard } from "react-native";
 import { Button } from "../components/UI-kit/Button";
 import { Container } from "../components/Container";
 import { ExtraButton } from "../components/ExtraButton";
 import { Form } from "../components/Form";
 import { Input } from "../components/UI-kit/Input";
 import { Title } from "../components/Title";
-import { theme } from "../constants/theme";
 import { UserImage } from "../components/UserImage";
 
 const initialState = {

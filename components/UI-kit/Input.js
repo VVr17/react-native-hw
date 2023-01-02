@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     fontSize: 16,
     backgroundColor: `${theme.colors.inputBackground}`,
-    // borderColor: `${theme.colors.border}`,
     fontFamily: "Roboto-Regular",
   },
 

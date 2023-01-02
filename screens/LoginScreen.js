@@ -6,7 +6,6 @@ import { ExtraButton } from "../components/ExtraButton";
 import { Form } from "../components/Form";
 import { Input } from "../components/UI-kit/Input";
 import { Title } from "../components/Title";
-import { theme } from "../constants/theme";
 
 const initialState = {
   email: "",
