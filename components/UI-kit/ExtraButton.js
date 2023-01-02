@@ -1,5 +1,5 @@
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import { theme } from "../constants/theme";
+import { theme } from "../../constants/theme";
 
 export const ExtraButton = ({ extraStyles, children, onClick }) => {
   return (

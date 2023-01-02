@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TextInput, View, StyleSheet, Text } from "react-native";
 import { theme } from "../../constants/theme";
-import { ExtraButton } from "../ExtraButton";
+import { ExtraButton } from "./ExtraButton";
 
 export const Input = ({
   isKeyboardShown,

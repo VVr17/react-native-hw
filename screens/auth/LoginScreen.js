@@ -1,26 +1,26 @@
 import React, { useState } from "react";
 import { Keyboard } from "react-native";
-import { Button } from "../components/UI-kit/Button";
-import { Container } from "../components/Container";
-import { ExtraButton } from "../components/ExtraButton";
-import { Form } from "../components/Form";
-import { Input } from "../components/UI-kit/Input";
-import { Title } from "../components/Title";
-import { UserImage } from "../components/UserImage";
+import { Button } from "../../components/UI-kit/Button";
+import { Container } from "../../components/Container";
+import { ExtraButton } from "../../components/UI-kit/ExtraButton";
+import { Form } from "../../components/Form";
+import { Input } from "../../components/UI-kit/Input";
+import { Title } from "../../components/Title";
 
 const initialState = {
-  login: "",
   email: "",
   password: "",
 };
-export const RegistrationScreen = ({ dimensions: { width } }) => {
+export const LoginScreen = ({ navigation }) => {
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
 
   const [state, setState] = useState({ ...initialState });
 
-  const onLoginChange = (value) => {
-    setState((prevState) => ({ ...prevState, login: value }));
+  const hideKeyboard = () => {
+    setIsKeyboardShown(false);
+    Keyboard.dismiss();
   };
+
   const onEmailChange = (value) => {
     setState((prevState) => ({ ...prevState, email: value }));
   };
@@ -32,32 +32,17 @@ export const RegistrationScreen = ({ dimensions: { width } }) => {
     setIsKeyboardShown(true);
   };
 
-  const hideKeyboard = () => {
-    setIsKeyboardShown(false);
-    Keyboard.dismiss();
-  };
-
   const onSubmit = () => {
-    console.log("state", state);
     hideKeyboard();
     setState(initialState);
   };
 
-  const { login, email, password } = state;
+  const { email, password } = state;
 
   return (
     <Container onClick={hideKeyboard}>
-      <Form isKeyboardShown={isKeyboardShown} type="registration">
-        <UserImage parentWidth={width} />
-        <Title>Регистрация</Title>
-
-        <Input
-          isKeyboardShown={isKeyboardShown}
-          onInputChange={onLoginChange}
-          value={login}
-          onInputFocus={onInputFocus}
-          placeholder="Логин"
-        />
+      <Form isKeyboardShown={isKeyboardShown} type="login">
+        <Title>Войти</Title>
 
         <Input
           isKeyboardShown={isKeyboardShown}
@@ -80,8 +65,11 @@ export const RegistrationScreen = ({ dimensions: { width } }) => {
 
         {!isKeyboardShown && (
           <>
-            <Button onSubmit={onSubmit}>Зарегистрироваться</Button>
-            <ExtraButton> Уже есть аккаунт? Войти</ExtraButton>
+            <Button onSubmit={onSubmit}>Войти</Button>
+            <ExtraButton onClick={() => navigation.navigate("Register")}>
+              {" "}
+              Нет аккаунта? Зарегистрироваться
+            </ExtraButton>
           </>
         )}
       </Form>

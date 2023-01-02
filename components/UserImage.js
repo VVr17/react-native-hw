@@ -1,13 +1,33 @@
-import { StyleSheet, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Dimensions, StyleSheet, View } from "react-native";
 import { theme } from "../constants/theme";
 import { IconButton } from "./UI-kit/IconButton";
 
-export const UserImage = ({ parentWidth }) => {
+export const UserImage = () => {
+  const [{ width }, setDimensions] = useState({
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+  });
+
+  useEffect(() => {
+    const onChange = () => {
+      const width = Dimensions.get("window").width;
+      const height = Dimensions.get("window").height;
+      setDimensions({ width, height });
+    };
+
+    Dimensions.addEventListener("change", onChange);
+
+    return () => {
+      Dimensions.removeEventListener("change", onChange);
+    };
+  }, []);
+
   return (
     <View
       style={{
         ...styles.imageWrapper,
-        left: (parentWidth - 120) / 2,
+        left: (width - 120) / 2,
       }}
     >
       <IconButton />

@@ -1,8 +1,10 @@
-import { LoginScreen } from "./screens/LoginScreen";
-import { RegistrationScreen } from "./screens/RegistrationScreen";
+import { LoginScreen } from "./screens/auth/LoginScreen";
+import { RegistrationScreen } from "./screens/auth/RegistrationScreen";
 import { useFonts } from "expo-font";
-import { Dimensions } from "react-native";
-import { useEffect, useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+const AuthStack = createStackNavigator();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -11,33 +13,24 @@ export default function App() {
     "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
   });
 
-  const [dimensions, setDimensions] = useState({
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-  });
-
-  useEffect(() => {
-    const onChange = () => {
-      const width = Dimensions.get("window").width;
-      const height = Dimensions.get("window").height;
-      setDimensions({ width, height });
-    };
-
-    Dimensions.addEventListener("change", onChange);
-
-    return () => {
-      Dimensions.removeEventListener("change", onChange);
-    };
-  }, []);
-
   if (!fontsLoaded) {
     return null;
   }
 
   return (
-    <>
-      <RegistrationScreen dimensions={dimensions} />
-      {/* <LoginScreen /> */}
-    </>
+    <NavigationContainer>
+      <AuthStack.Navigator initialRouteName="Login">
+        <AuthStack.Screen
+          options={{ headerShown: false }}
+          name="Login"
+          component={LoginScreen}
+        />
+        <AuthStack.Screen
+          options={{ headerShown: false }}
+          name="Register"
+          component={RegistrationScreen}
+        />
+      </AuthStack.Navigator>
+    </NavigationContainer>
   );
 }
