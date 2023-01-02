@@ -1,15 +1,17 @@
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { TouchableHighlight } from "react-native-gesture-handler";
 import { theme } from "../../constants/theme";
 
 export const Button = ({ onSubmit, children }) => {
   return (
-    <TouchableOpacity
+    <TouchableHighlight
       style={styles.button}
       activeOpacity={0.6}
+      underlayColor={`${theme.colors.active}`}
       onPress={onSubmit}
     >
       <Text style={styles.buttonTitle}>{children}</Text>
-    </TouchableOpacity>
+    </TouchableHighlight>
   );
 };
 

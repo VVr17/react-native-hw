@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Keyboard } from "react-native";
 import { Button } from "../../components/UI-kit/Button";
 import { Container } from "../../components/Container";
@@ -7,6 +7,7 @@ import { Form } from "../../components/Form";
 import { Input } from "../../components/UI-kit/Input";
 import { Title } from "../../components/Title";
 import { UserImage } from "../../components/UserImage";
+import { Dimensions } from "react-native";
 
 const initialState = {
   login: "",
@@ -41,6 +42,7 @@ export const RegistrationScreen = ({ navigation }) => {
     console.log("state", state);
     hideKeyboard();
     setState(initialState);
+    // navigation.navigate("Home");
   };
 
   const { login, email, password } = state;

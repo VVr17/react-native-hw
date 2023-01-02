@@ -6,21 +6,16 @@ import { IconButton } from "./UI-kit/IconButton";
 export const UserImage = () => {
   const [{ width }, setDimensions] = useState({
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
   });
 
   useEffect(() => {
     const onChange = () => {
       const width = Dimensions.get("window").width;
-      const height = Dimensions.get("window").height;
-      setDimensions({ width, height });
+      setDimensions({ width });
     };
 
-    Dimensions.addEventListener("change", onChange);
-
-    return () => {
-      Dimensions.removeEventListener("change", onChange);
-    };
+    dimensionsHandler = Dimensions.addEventListener("change", onChange);
+    return () => dimensionsHandler.remove();
   }, []);
 
   return (

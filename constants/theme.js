@@ -3,6 +3,7 @@ export const theme = {
     mainText: "#212121",
     secondaryText: "rgba(33, 33, 33, 0.8)",
     accent: "#FF6C00",
+    active: "#ed6807",
     secondaryAccent: "#1B4371",
     mainBackground: "#ffffff",
     inputBackground: "#F6F6F6",
