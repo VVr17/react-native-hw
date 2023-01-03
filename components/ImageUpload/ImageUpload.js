@@ -4,7 +4,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { theme } from "../../constants/theme";
 import { CameraButton } from "./CameraButton";
 
-export const UploadImage = ({ imageUrl }) => {
+export const UploadImage = ({ image }) => {
   const addImage = () => {
     console.log("add photo on Click");
   };
@@ -12,14 +12,10 @@ export const UploadImage = ({ imageUrl }) => {
   return (
     <View style={imageUploaderStyles.container}>
       <View style={imageUploaderStyles.imageContainer}>
-        {/* {imageUrl && (
-        <Image source={{ uri: imageUrl }} style={{ width: 'auto', height: 240 }} />
-      )} */}
-
         <CameraButton onClick={addImage} />
       </View>
       <Text style={{ color: `${theme.colors.placeholder}`, fontSize: 16 }}>
-        {imageUrl ? "Редактировать" : "Загрузите"} фото
+        {image ? "Редактировать" : "Загрузите"} фото
       </Text>
     </View>
   );

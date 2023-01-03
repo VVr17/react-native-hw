@@ -2,7 +2,7 @@ import { TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { theme } from "../../constants/theme";
 
-export const HeaderIconButton = ({ name, styles }) => {
+export const HeaderIconButton = ({ name, styles, onClick }) => {
   return (
     <TouchableOpacity
       style={{
@@ -12,7 +12,7 @@ export const HeaderIconButton = ({ name, styles }) => {
         paddingLeft: name === "logout" ? 0 : 16,
       }}
       activeOpacity={0.6}
-      // onPress={onClick}
+      onPress={onClick}
     >
       <MaterialCommunityIcons
         name={name}

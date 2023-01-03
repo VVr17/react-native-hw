@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { LoginScreen } from "../screens/auth/LoginScreen";
-import { RegistrationScreen } from "../screens/auth/RegistrationScreen";
-import { PostsScreen } from "../screens/mainScreen/PostsScreen";
-import { CreatePostsScreen } from "../screens/mainScreen/CreatePostsScreen";
-import { ProfileScreen } from "../screens/mainScreen/ProfileScreen";
-import { theme } from "../constants/theme";
+import { LoginScreen } from "./screens/auth/LoginScreen";
+import { RegistrationScreen } from "./screens/auth/RegistrationScreen";
+import { PostsScreen } from "./screens/mainScreen/PostsScreen";
+import { CreatePostsScreen } from "./screens/mainScreen/CreatePostsScreen";
+import { ProfileScreen } from "./screens/mainScreen/ProfileScreen";
+import { theme } from "./constants/theme";
 import {
   Button,
   Dimensions,
@@ -16,7 +16,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { HeaderIconButton } from "../components/UI-kit/HeaderIconButton";
+import { HeaderIconButton } from "./components/UI-kit/HeaderIconButton";
+import { useUser } from "./hooks/useUser";
 
 const ScreenWidth = Dimensions.get("window").width;
 const AuthStack = createStackNavigator();
@@ -81,12 +82,17 @@ export const useRoute = (isAuth) => {
       <MainTab.Screen
         name="Create"
         component={CreatePostsScreen}
-        options={{
+        options={({ navigation }) => ({
           headerTitleAlign: "center",
           headerTitle: () => (
             <Text style={styles.title}>Создать публикацию</Text>
           ),
-          headerLeft: () => <HeaderIconButton name="keyboard-backspace" />,
+          headerLeft: () => (
+            <HeaderIconButton
+              name="keyboard-backspace"
+              onClick={() => navigation.goBack()}
+            />
+          ),
           tabBarIcon: ({ focused }) => (
             <View
               style={{
@@ -107,7 +113,7 @@ export const useRoute = (isAuth) => {
               />
             </View>
           ),
-        }}
+        })}
       />
       <MainTab.Screen
         name="Profile"

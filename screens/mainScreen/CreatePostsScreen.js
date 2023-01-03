@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Image, Keyboard, Text, View } from "react-native";
+import { Image, Keyboard, View } from "react-native";
 import { Surface } from "react-native-paper";
 import { UploadImage } from "../../components/ImageUpload/ImageUpload";
 import { MainContainer } from "../../components/MainContainer";
@@ -7,7 +7,7 @@ import { Button } from "../../components/UI-kit/Button";
 import { PostInput } from "../../components/UI-kit/PostInput";
 
 const initialState = {
-  imageUrl: null,
+  image: null,
   title: "",
   location: "",
 };
@@ -30,8 +30,6 @@ export const CreatePostsScreen = () => {
     setState((prevState) => ({ ...prevState, location: value }));
   };
 
-  const onImageUpload = (value) => {};
-
   const onInputFocus = () => {
     setIsKeyboardShown(true);
   };
@@ -42,12 +40,12 @@ export const CreatePostsScreen = () => {
     console.log("state", state);
   };
 
-  const { location, imageUrl, title } = state;
+  const { location, image, title } = state;
 
   return (
     <MainContainer onClick={hideKeyboard}>
       <View>
-        {!isKeyboardShown && <UploadImage imageUrl={imageUrl} />}
+        {!isKeyboardShown && <UploadImage image={image} />}
         <PostInput
           isKeyboardShown={isKeyboardShown}
           onInputChange={onTitleChange}

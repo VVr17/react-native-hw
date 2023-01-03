@@ -1,7 +1,8 @@
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
-import { useRoute } from "./router/router";
+import { useRoute } from "./router";
 import { useState } from "react";
+import { UserContext } from "./hooks/useUser";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -10,11 +11,25 @@ export default function App() {
     "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
   });
 
-  const routing = useRoute(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const logIn = () => {
+    setIsLoggedIn(true);
+  };
+
+  const logOut = () => {
+    setIsLoggedIn(false);
+  };
+
+  const routing = useRoute(isLoggedIn);
 
   if (!fontsLoaded) {
     return null;
   }
 
-  return <NavigationContainer>{routing}</NavigationContainer>;
+  return (
+    <UserContext.Provider value={{ isLoggedIn, logIn, logOut }}>
+      <NavigationContainer>{routing}</NavigationContainer>
+    </UserContext.Provider>
+  );
 }

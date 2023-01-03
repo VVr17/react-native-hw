@@ -6,13 +6,17 @@ import { ExtraButton } from "../../components/UI-kit/ExtraButton";
 import { Form } from "../../components/Form";
 import { Input } from "../../components/UI-kit/Input";
 import { Title } from "../../components/Title";
-import { useRoute } from "@react-navigation/native";
+import { useUser } from "../../hooks/useUser";
+// import { useRoute } from "@react-navigation/native";
+// import { useUser } from "../../App";
 
 const initialState = {
   email: "",
   password: "",
 };
 export const LoginScreen = ({ navigation }) => {
+  const { logIn } = useUser();
+
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
 
   const [state, setState] = useState({ ...initialState });
@@ -36,6 +40,7 @@ export const LoginScreen = ({ navigation }) => {
   const onSubmit = () => {
     hideKeyboard();
     setState(initialState);
+    logIn();
   };
 
   const { email, password } = state;

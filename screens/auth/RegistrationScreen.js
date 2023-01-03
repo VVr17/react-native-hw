@@ -7,6 +7,8 @@ import { Form } from "../../components/Form";
 import { Input } from "../../components/UI-kit/Input";
 import { Title } from "../../components/Title";
 import { UserImage } from "../../components/UserImage";
+import { useUser } from "../../hooks/useUser";
+// import { useUser } from "../../App";
 
 const initialState = {
   login: "",
@@ -15,6 +17,7 @@ const initialState = {
 };
 export const RegistrationScreen = ({ navigation }) => {
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
+  const { logIn } = useUser();
 
   const [state, setState] = useState({ ...initialState });
 
@@ -41,6 +44,7 @@ export const RegistrationScreen = ({ navigation }) => {
     console.log("state", state);
     hideKeyboard();
     setState(initialState);
+    logIn();
   };
 
   const { login, email, password } = state;
