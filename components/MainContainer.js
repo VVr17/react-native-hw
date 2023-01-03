@@ -1,5 +1,4 @@
 import {
-  ImageBackground,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   View,
@@ -13,7 +12,7 @@ export const MainContainer = ({ children, onClick }) => {
       <View style={styles.container}>
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={{ flex: 1, justifyContent: "flex-end" }}
+          style={{ flex: 1 }}
         >
           {children}
         </KeyboardAvoidingView>
@@ -27,5 +26,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: `${theme.colors.mainBackground}`,
     fontFamily: "Roboto-Regular",
+    paddingHorizontal: 16,
+    paddingVertical: 32,
   },
 });

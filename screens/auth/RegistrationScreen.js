@@ -7,7 +7,6 @@ import { Form } from "../../components/Form";
 import { Input } from "../../components/UI-kit/Input";
 import { Title } from "../../components/Title";
 import { UserImage } from "../../components/UserImage";
-import { Dimensions } from "react-native";
 
 const initialState = {
   login: "",
@@ -42,7 +41,6 @@ export const RegistrationScreen = ({ navigation }) => {
     console.log("state", state);
     hideKeyboard();
     setState(initialState);
-    // navigation.navigate("Home");
   };
 
   const { login, email, password } = state;
@@ -50,7 +48,7 @@ export const RegistrationScreen = ({ navigation }) => {
   return (
     <Container onClick={hideKeyboard}>
       <Form isKeyboardShown={isKeyboardShown} type="registration">
-        <UserImage />
+        <UserImage isActive={true} />
         <Title>Регистрация</Title>
 
         <Input

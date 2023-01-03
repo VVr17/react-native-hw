@@ -6,6 +6,7 @@ import { ExtraButton } from "../../components/UI-kit/ExtraButton";
 import { Form } from "../../components/Form";
 import { Input } from "../../components/UI-kit/Input";
 import { Title } from "../../components/Title";
+import { useRoute } from "@react-navigation/native";
 
 const initialState = {
   email: "",
@@ -67,7 +68,6 @@ export const LoginScreen = ({ navigation }) => {
           <>
             <Button onSubmit={onSubmit}>Войти</Button>
             <ExtraButton onClick={() => navigation.navigate("Register")}>
-              {" "}
               Нет аккаунта? Зарегистрироваться
             </ExtraButton>
           </>

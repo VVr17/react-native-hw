@@ -1,5 +1,4 @@
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import { Text, StyleSheet, TouchableHighlight } from "react-native";
 import { theme } from "../../constants/theme";
 
 export const Button = ({ onSubmit, children }) => {
