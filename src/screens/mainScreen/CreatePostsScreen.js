@@ -44,12 +44,17 @@ export const CreatePostsScreen = ({ navigation }) => {
 
     if (requiredDataMissing) return;
 
-    navigation.navigate("Posts", { locationName, pictureUri, title, location });
+    navigation.navigate("DefaultPosts", {
+      locationName,
+      pictureUri,
+      title,
+      location,
+    });
     hideKeyboard();
 
     setPictureUri(null);
     setTitle(null);
-    setPictureUri(null);
+    setLocationName(null);
     setLocation(null);
   };
 

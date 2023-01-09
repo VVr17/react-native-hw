@@ -1,10 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { theme } from "../../constants/theme";
 import IconFa from "react-native-vector-icons/FontAwesome5";
 
-export const PostLocation = ({ children }) => {
+export const PostLocation = ({ children, onClick }) => {
   return (
-    <View style={styles.location}>
+    <TouchableOpacity
+      style={styles.location}
+      activeOpacity={0.6}
+      onPress={onClick}
+    >
       <IconFa
         style={styles.icon}
         name="map-marker-alt"
@@ -12,7 +16,7 @@ export const PostLocation = ({ children }) => {
         color={`${theme.colors.placeholder}`}
       />
       <Text style={styles.text}>{children}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

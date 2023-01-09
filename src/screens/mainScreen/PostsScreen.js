@@ -1,29 +1,66 @@
-import { useEffect, useState } from "react";
-import { FlatList, Image, Text, View } from "react-native";
-import { MainContainer } from "../../components/MainContainer";
-import { PostCard } from "../../components/PostCard/PostCard";
-import { UserCard } from "../../components/UserCard";
+import { createStackNavigator } from "@react-navigation/stack";
+import { StyleSheet, Text } from "react-native";
+import { HeaderIconButton } from "../../components/UI-kit/HeaderIconButton";
+import { CommentsScreen } from "../nestedScreens/CommentsScreen";
+import { DefaultPosts } from "../nestedScreens/DefaultPosts";
+import { MapScreen } from "../nestedScreens/MapScreen";
 
-export const PostsScreen = ({ route: { params } }) => {
-  const [posts, setPosts] = useState([]);
+const NestedScreen = createStackNavigator();
 
-  useEffect(() => {
-    if (params) setPosts((prevState) => [...prevState, params]);
-  }, [params]);
-
-  console.log("posts", posts);
+export const PostsScreen = ({ navigation }) => {
   return (
-    <MainContainer>
-      <UserCard />
-      {posts.length === 0 ? (
-        <View />
-      ) : (
-        <FlatList
-          data={posts}
-          renderItem={({ item }) => <PostCard screen="posts" post={item} />}
-          keyExtractor={(item, index) => index}
-        />
-      )}
-    </MainContainer>
+    <NestedScreen.Navigator initialRouteName="Posts">
+      <NestedScreen.Screen
+        // options={{ headerShown: false }}
+        name="DefaultPosts"
+        component={DefaultPosts}
+        options={{
+          headerTitleAlign: "center",
+          headerRight: () => <HeaderIconButton name="logout" />,
+          headerTitle: () => <Text style={styles.title}>Публикации</Text>,
+        }}
+      />
+      <NestedScreen.Screen
+        // options={{ headerShown: false }}
+        name="Comments"
+        component={CommentsScreen}
+        options={{
+          headerTitleAlign: "center",
+          headerTitle: () => <Text style={styles.title}>Комментарии</Text>,
+          headerLeft: () => (
+            <HeaderIconButton
+              name="keyboard-backspace"
+              onClick={() => navigation.goBack()}
+            />
+          ),
+        }}
+      />
+      <NestedScreen.Screen
+        // options={{ headerShown: false }}
+        name="Map"
+        component={MapScreen}
+        options={{
+          headerTitleAlign: "center",
+          headerTitle: () => <Text style={styles.title}>Карта</Text>,
+          headerLeft: () => (
+            <HeaderIconButton
+              name="keyboard-backspace"
+              onClick={() => navigation.goBack()}
+            />
+          ),
+        }}
+      />
+    </NestedScreen.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  header: {
+    borderBottomWidth: 1,
+  },
+  title: {
+    textAlign: "center",
+    fontSize: 15,
+    fontFamily: "Roboto-Medium",
+  },
+});

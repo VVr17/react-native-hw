@@ -1,11 +1,15 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import IconFa from "react-native-vector-icons/FontAwesome5";
 import { theme } from "../../constants/theme";
 
-export const PostData = ({ children, type, screen }) => {
+export const PostData = ({ children, type, screen, onClick }) => {
   return (
-    <View style={styles.wrapper}>
+    <TouchableOpacity
+      style={styles.wrapper}
+      activeOpacity={0.6}
+      onPress={onClick}
+    >
       {type === "comments" && (
         <Icon
           style={{
@@ -29,7 +33,7 @@ export const PostData = ({ children, type, screen }) => {
         />
       )}
       <Text style={styles.text}>{children}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

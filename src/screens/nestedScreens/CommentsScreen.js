@@ -1,5 +1,5 @@
 import { Text } from "react-native";
-import { MainContainer } from "../components/MainContainer";
+import { MainContainer } from "../../components/MainContainer";
 
 export const CommentsScreen = () => {
   return (

@@ -5,7 +5,7 @@ import { PostLocation } from "./PostLocation";
 
 const dimensions = Dimensions.get("window");
 
-export const PostCard = ({ screen, post }) => {
+export const PostCard = ({ screen, post, onCommentsClick, onMapClick }) => {
   const { pictureUri, title, locationName } = post;
 
   return (
@@ -20,7 +20,7 @@ export const PostCard = ({ screen, post }) => {
       </View>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.descriptionWrapper}>
-        <PostData type="comments" screen={screen}>
+        <PostData type="comments" screen={screen} onClick={onCommentsClick}>
           0
         </PostData>
 
@@ -29,7 +29,7 @@ export const PostCard = ({ screen, post }) => {
             150
           </PostData>
         )}
-        <PostLocation>{locationName}</PostLocation>
+        <PostLocation onClick={onMapClick}>{locationName}</PostLocation>
       </View>
     </View>
   );

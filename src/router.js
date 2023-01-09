@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -8,18 +7,9 @@ import { PostsScreen } from "./screens/mainScreen/PostsScreen";
 import { CreatePostsScreen } from "./screens/mainScreen/CreatePostsScreen";
 import { ProfileScreen } from "./screens/mainScreen/ProfileScreen";
 import { theme } from "./constants/theme";
-import {
-  Button,
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import { HeaderIconButton } from "./components/UI-kit/HeaderIconButton";
-import { useUser } from "./hooks/useUser";
 
-const ScreenWidth = Dimensions.get("window").width;
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
@@ -54,9 +44,10 @@ export const useRoute = (isAuth) => {
         name="Posts"
         component={PostsScreen}
         options={{
-          headerTitleAlign: "center",
-          headerTitle: () => <Text style={styles.title}>Публикации</Text>,
-          headerRight: () => <HeaderIconButton name="logout" />,
+          headerShown: false,
+          // headerTitleAlign: "center",
+          // headerTitle: () => <Text style={styles.title}>Публикации</Text>,
+          // headerRight: () => <HeaderIconButton name="logout" />,
           tabBarIcon: ({ focused }) => (
             <View
               style={{
