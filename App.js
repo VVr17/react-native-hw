@@ -1,14 +1,14 @@
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
-import { useRoute } from "./router";
 import { useState } from "react";
-import { UserContext } from "./hooks/useUser";
+import { UserContext } from "./src/hooks/useUser";
+import { useRoute } from "./src/router";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    "Roboto-Regular": require("./assets/fonts/Roboto-Regular.ttf"),
-    "Roboto-Medium": require("./assets/fonts/Roboto-Medium.ttf"),
-    "Roboto-Bold": require("./assets/fonts/Roboto-Bold.ttf"),
+    "Roboto-Regular": require("./src/assets/fonts/Roboto-Regular.ttf"),
+    "Roboto-Medium": require("./src/assets/fonts/Roboto-Medium.ttf"),
+    "Roboto-Bold": require("./src/assets/fonts/Roboto-Bold.ttf"),
   });
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);

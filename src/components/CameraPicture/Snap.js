@@ -2,12 +2,9 @@ import { TouchableOpacity, StyleSheet } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { theme } from "../../constants/theme";
 
-export const CameraButton = ({ onClick }) => {
+export const Snap = ({ onClick }) => {
   return (
-    <TouchableOpacity
-      onPress={onClick}
-      style={imageUploaderStyles.uploadButton}
-    >
+    <TouchableOpacity onPress={onClick} style={styles.snapButton}>
       <MaterialCommunityIcons
         name="camera"
         size={26}
@@ -17,8 +14,8 @@ export const CameraButton = ({ onClick }) => {
   );
 };
 
-const imageUploaderStyles = StyleSheet.create({
-  uploadButton: {
+const styles = StyleSheet.create({
+  snapButton: {
     opacity: 0.7,
     backgroundColor: `${theme.colors.mainBackground}`,
     width: 60,

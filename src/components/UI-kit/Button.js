@@ -1,15 +1,29 @@
 import { Text, StyleSheet, TouchableHighlight } from "react-native";
 import { theme } from "../../constants/theme";
 
-export const Button = ({ onSubmit, children }) => {
+export const Button = ({ onSubmit, children, disabled = false }) => {
   return (
     <TouchableHighlight
-      style={styles.button}
+      style={{
+        ...styles.button,
+        backgroundColor: disabled
+          ? theme.colors.inputBackground
+          : theme.colors.accent,
+      }}
       activeOpacity={0.6}
       underlayColor={`${theme.colors.active}`}
       onPress={onSubmit}
     >
-      <Text style={styles.buttonTitle}>{children}</Text>
+      <Text
+        style={{
+          ...styles.buttonTitle,
+          color: disabled
+            ? theme.colors.placeholder
+            : theme.colors.mainBackground,
+        }}
+      >
+        {children}
+      </Text>
     </TouchableHighlight>
   );
 };

@@ -1,14 +1,24 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import { theme } from "../../constants/theme";
-import IconFa from "react-native-vector-icons/FontAwesome5";
 import { PostData } from "./PostData";
 import { PostLocation } from "./PostLocation";
 
-export const PostCard = ({ screen }) => {
+const dimensions = Dimensions.get("window");
+
+export const PostCard = ({ screen, post }) => {
+  const { pictureUri, title, locationName } = post;
+
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}></View>
-      <Text style={styles.title}>Title</Text>
+      <View style={styles.imageContainer}>
+        <Image
+          source={{ uri: pictureUri }}
+          alt="post picture"
+          resizeMode={"cover"}
+          style={{ height: 240, width: dimensions.width }}
+        />
+      </View>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.descriptionWrapper}>
         <PostData type="comments" screen={screen}>
           0
@@ -19,8 +29,7 @@ export const PostCard = ({ screen }) => {
             150
           </PostData>
         )}
-
-        <PostLocation>Location</PostLocation>
+        <PostLocation>{locationName}</PostLocation>
       </View>
     </View>
   );
