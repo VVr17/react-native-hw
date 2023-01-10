@@ -45,9 +45,6 @@ export const useRoute = (isAuth) => {
         component={PostsScreen}
         options={{
           headerShown: false,
-          // headerTitleAlign: "center",
-          // headerTitle: () => <Text style={styles.title}>Публикации</Text>,
-          // headerRight: () => <HeaderIconButton name="logout" />,
           tabBarIcon: ({ focused }) => (
             <View
               style={{

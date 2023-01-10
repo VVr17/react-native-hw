@@ -9,5 +9,6 @@ export const theme = {
     inputBackground: "#F6F6F6",
     placeholder: "#BDBDBD",
     border: "#E8E8E8",
+    comment: "rgba(0, 0, 0, 0.03)",
   },
 };

@@ -2,25 +2,32 @@ import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import { theme } from "../../constants/theme";
 import { PostData } from "./PostData";
 import { PostLocation } from "./PostLocation";
+import { useNavigation } from "@react-navigation/native";
 
 const dimensions = Dimensions.get("window");
 
-export const PostCard = ({ screen, post, onCommentsClick, onMapClick }) => {
-  const { pictureUri, title, locationName } = post;
+export const PostCard = ({ screen, post }) => {
+  const navigation = useNavigation();
+
+  const { pictureUri, title, locationName, location } = post;
 
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image
           source={{ uri: pictureUri }}
-          alt="post picture"
+          alt={title}
           resizeMode={"cover"}
           style={{ height: 240, width: dimensions.width }}
         />
       </View>
       <Text style={styles.title}>{title}</Text>
       <View style={styles.descriptionWrapper}>
-        <PostData type="comments" screen={screen} onClick={onCommentsClick}>
+        <PostData
+          type="comments"
+          screen={screen}
+          onClick={() => navigation.navigate("Comments", { pictureUri, title })}
+        >
           0
         </PostData>
 
@@ -29,7 +36,11 @@ export const PostCard = ({ screen, post, onCommentsClick, onMapClick }) => {
             150
           </PostData>
         )}
-        <PostLocation onClick={onMapClick}>{locationName}</PostLocation>
+        <PostLocation
+          onClick={() => navigation.navigate("Map", { title, location })}
+        >
+          {locationName}
+        </PostLocation>
       </View>
     </View>
   );

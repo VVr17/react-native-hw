@@ -4,15 +4,24 @@ import { PostCard } from "../../components/PostCard/PostCard";
 import { HeaderIconButton } from "../../components/UI-kit/HeaderIconButton";
 import { UserImage } from "../../components/UserImage";
 import { theme } from "../../constants/theme";
+import { useUser } from "../../hooks/useUser";
 
 export const ProfileScreen = () => {
+  const { logOut } = useUser();
+
   return (
     <Container>
       <View style={styles.container}>
         <UserImage isActive={false} />
-        <HeaderIconButton name="logout" styles={styles.icon} />
+        <HeaderIconButton
+          name="logout"
+          onClick={() => {
+            logOut();
+          }}
+          styles={styles.icon}
+        />
         <Text style={styles.name}>Natali Romanova</Text>
-        <PostCard screen="profile" />
+        {/* <PostCard screen="profile" /> */}
       </View>
     </Container>
   );

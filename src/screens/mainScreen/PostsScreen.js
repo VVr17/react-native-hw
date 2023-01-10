@@ -1,6 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet, Text } from "react-native";
 import { HeaderIconButton } from "../../components/UI-kit/HeaderIconButton";
+import { useUser } from "../../hooks/useUser";
 import { CommentsScreen } from "../nestedScreens/CommentsScreen";
 import { DefaultPosts } from "../nestedScreens/DefaultPosts";
 import { MapScreen } from "../nestedScreens/MapScreen";
@@ -8,24 +9,33 @@ import { MapScreen } from "../nestedScreens/MapScreen";
 const NestedScreen = createStackNavigator();
 
 export const PostsScreen = ({ navigation }) => {
+  const { logOut } = useUser();
+
   return (
     <NestedScreen.Navigator initialRouteName="Posts">
       <NestedScreen.Screen
-        // options={{ headerShown: false }}
         name="DefaultPosts"
         component={DefaultPosts}
         options={{
           headerTitleAlign: "center",
-          headerRight: () => <HeaderIconButton name="logout" />,
+          headerStyle: { ...styles.header },
+          headerRight: () => (
+            <HeaderIconButton
+              name="logout"
+              onClick={() => {
+                logOut();
+              }}
+            />
+          ),
           headerTitle: () => <Text style={styles.title}>Публикации</Text>,
         }}
       />
       <NestedScreen.Screen
-        // options={{ headerShown: false }}
         name="Comments"
         component={CommentsScreen}
         options={{
           headerTitleAlign: "center",
+          headerStyle: { ...styles.header },
           headerTitle: () => <Text style={styles.title}>Комментарии</Text>,
           headerLeft: () => (
             <HeaderIconButton
@@ -36,11 +46,11 @@ export const PostsScreen = ({ navigation }) => {
         }}
       />
       <NestedScreen.Screen
-        // options={{ headerShown: false }}
         name="Map"
         component={MapScreen}
         options={{
           headerTitleAlign: "center",
+          headerStyle: { ...styles.header },
           headerTitle: () => <Text style={styles.title}>Карта</Text>,
           headerLeft: () => (
             <HeaderIconButton
