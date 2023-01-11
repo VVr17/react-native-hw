@@ -10,8 +10,6 @@ import { store } from "./src/redux/store";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
 
-const ref = createNavigationContainerRef();
-
 export default function App() {
   const [fontsLoaded] = useFonts({
     "Roboto-Regular": require("./src/assets/fonts/Roboto-Regular.ttf"),
@@ -19,6 +17,7 @@ export default function App() {
     "Roboto-Bold": require("./src/assets/fonts/Roboto-Bold.ttf"),
   });
 
+  const ref = createNavigationContainerRef();
   const [routeName, setRouteName] = useState();
   const [user, setUser] = useState(null);
 

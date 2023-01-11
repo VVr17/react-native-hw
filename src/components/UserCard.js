@@ -1,7 +1,11 @@
 import { StyleSheet, View, Text, Image } from "react-native";
+import { useSelector } from "react-redux";
 import { theme } from "../constants/theme";
+import { selectUser } from "../redux/auth/authSelector";
 
 export const UserCard = () => {
+  const { login, email } = useSelector(selectUser);
+
   return (
     <View style={styles.container}>
       <View style={styles.imageWrapper}>
@@ -11,8 +15,8 @@ export const UserCard = () => {
         />
       </View>
       <View>
-        <Text style={styles.name}>Natali Romanova</Text>
-        <Text style={styles.email}>email@example.com</Text>
+        <Text style={styles.name}>{login}</Text>
+        <Text style={styles.email}>{email}</Text>
       </View>
     </View>
   );

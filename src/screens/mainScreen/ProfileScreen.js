@@ -4,8 +4,6 @@ import { PostCard } from "../../components/PostCard/PostCard";
 import { HeaderIconButton } from "../../components/UI-kit/HeaderIconButton";
 import { UserImage } from "../../components/UserImage";
 import { theme } from "../../constants/theme";
-import { useUser } from "../../hooks/useUser";
-
 export const ProfileScreen = () => {
   return (
     <Container>
