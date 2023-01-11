@@ -13,7 +13,7 @@ import { HeaderIconButton } from "./components/UI-kit/HeaderIconButton";
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
-export const useRoute = ({ routeName }) => {
+export const useRoute = ({ routeName, user }) => {
   const hideTab = routeName === "Comments" || routeName === "Map";
 
   const isLoggedIn = false;

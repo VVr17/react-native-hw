@@ -1,6 +1,6 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../../../firebase/config";
@@ -47,4 +47,13 @@ export const authSignInUser =
 
 export const authSignOutUser = () => (dispatch) => {};
 
-export const authStateChangeUser = () => (dispatch) => {};
+export const authStateChangeUser = async () => (dispatch) => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("signed in");
+      // setUser(user);
+    } else {
+      console.log("signed out");
+    }
+  });
+};
