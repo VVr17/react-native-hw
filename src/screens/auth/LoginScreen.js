@@ -6,18 +6,17 @@ import { ExtraButton } from "../../components/UI-kit/ExtraButton";
 import { Form } from "../../components/Form";
 import { Input } from "../../components/UI-kit/Input";
 import { Title } from "../../components/Title";
-import { useUser } from "../../hooks/useUser";
+import { useDispatch } from "react-redux";
+import { authSignInUser } from "../../redux/auth/authOperations";
 
 const initialState = {
   email: "",
   password: "",
 };
 export const LoginScreen = ({ navigation }) => {
-  const { logIn } = useUser();
-
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
-
   const [state, setState] = useState({ ...initialState });
+  const dispatch = useDispatch();
 
   const hideKeyboard = () => {
     setIsKeyboardShown(false);
@@ -38,7 +37,8 @@ export const LoginScreen = ({ navigation }) => {
   const onSubmit = () => {
     hideKeyboard();
     setState(initialState);
-    logIn();
+
+    dispatch(authSignInUser(state));
   };
 
   const { email, password } = state;

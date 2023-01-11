@@ -7,18 +7,19 @@ import { Form } from "../../components/Form";
 import { Input } from "../../components/UI-kit/Input";
 import { Title } from "../../components/Title";
 import { UserImage } from "../../components/UserImage";
-import { useUser } from "../../hooks/useUser";
+import { useDispatch } from "react-redux";
+import { authSingUpUser } from "../../redux/auth/authOperations";
 
 const initialState = {
   login: "",
   email: "",
   password: "",
 };
+
 export const RegistrationScreen = ({ navigation }) => {
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
-  const { logIn } = useUser();
-
   const [state, setState] = useState({ ...initialState });
+  const dispatch = useDispatch();
 
   const onLoginChange = (value) => {
     setState((prevState) => ({ ...prevState, login: value }));
@@ -43,7 +44,7 @@ export const RegistrationScreen = ({ navigation }) => {
     console.log("state", state);
     hideKeyboard();
     setState(initialState);
-    logIn();
+    dispatch(authSingUpUser(state));
   };
 
   const { login, email, password } = state;

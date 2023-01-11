@@ -1,7 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet, Text } from "react-native";
 import { HeaderIconButton } from "../../components/UI-kit/HeaderIconButton";
-import { useUser } from "../../hooks/useUser";
 import { CommentsScreen } from "../nestedScreens/CommentsScreen";
 import { DefaultPosts } from "../nestedScreens/DefaultPosts";
 import { MapScreen } from "../nestedScreens/MapScreen";
@@ -9,8 +8,6 @@ import { MapScreen } from "../nestedScreens/MapScreen";
 const NestedScreen = createStackNavigator();
 
 export const PostsScreen = ({ navigation }) => {
-  const { logOut } = useUser();
-
   return (
     <NestedScreen.Navigator initialRouteName="Posts">
       <NestedScreen.Screen
@@ -24,7 +21,7 @@ export const PostsScreen = ({ navigation }) => {
             <HeaderIconButton
               name="logout"
               onClick={() => {
-                logOut();
+                // logOut();
               }}
             />
           ),

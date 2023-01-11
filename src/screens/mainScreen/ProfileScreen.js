@@ -7,8 +7,6 @@ import { theme } from "../../constants/theme";
 import { useUser } from "../../hooks/useUser";
 
 export const ProfileScreen = () => {
-  const { logOut } = useUser();
-
   return (
     <Container>
       <View style={styles.container}>
@@ -16,7 +14,7 @@ export const ProfileScreen = () => {
         <HeaderIconButton
           name="logout"
           onClick={() => {
-            logOut();
+            // logOut();
           }}
           styles={styles.icon}
         />

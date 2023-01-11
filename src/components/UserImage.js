@@ -26,10 +26,10 @@ export const UserImage = ({ isActive }) => {
           left: (width - 120) / 2,
         }}
       >
-        <Image
+        {/* <Image
           source={require("../assets/images/template.jpg")}
           style={styles.image}
-        />
+        /> */}
         <AddButton isActive={isActive} />
       </View>
     </>

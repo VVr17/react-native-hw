@@ -13,9 +13,10 @@ import { HeaderIconButton } from "./components/UI-kit/HeaderIconButton";
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
-export const useRoute = ({ isLoggedIn, routeName }) => {
+export const useRoute = ({ routeName }) => {
   const hideTab = routeName === "Comments" || routeName === "Map";
 
+  const isLoggedIn = false;
   if (!isLoggedIn) {
     return (
       <AuthStack.Navigator initialRouteName="Login">
