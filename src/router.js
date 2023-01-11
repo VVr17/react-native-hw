@@ -13,8 +13,10 @@ import { HeaderIconButton } from "./components/UI-kit/HeaderIconButton";
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
-export const useRoute = (isAuth) => {
-  if (!isAuth) {
+export const useRoute = ({ isLoggedIn, routeName }) => {
+  const hideTab = routeName === "Comments" || routeName === "Map";
+
+  if (!isLoggedIn) {
     return (
       <AuthStack.Navigator initialRouteName="Login">
         <AuthStack.Screen
@@ -45,6 +47,7 @@ export const useRoute = (isAuth) => {
         component={PostsScreen}
         options={{
           headerShown: false,
+          tabBarStyle: { display: hideTab ? "none" : "flex" },
           tabBarIcon: ({ focused }) => (
             <View
               style={{
@@ -70,7 +73,7 @@ export const useRoute = (isAuth) => {
       <MainTab.Screen
         name="Create"
         component={CreatePostsScreen}
-        options={({ navigation }) => ({
+        options={({ navigation, route }) => ({
           headerTitleAlign: "center",
           headerTitle: () => (
             <Text style={styles.title}>Создать публикацию</Text>
@@ -81,6 +84,7 @@ export const useRoute = (isAuth) => {
               onClick={() => navigation.goBack()}
             />
           ),
+          tabBarStyle: { display: "none" },
           tabBarIcon: ({ focused }) => (
             <View
               style={{

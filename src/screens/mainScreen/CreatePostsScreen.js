@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Keyboard, View } from "react-native";
+import { Keyboard, StyleSheet, View } from "react-native";
 import { CameraPicture } from "../../components/CameraPicture/Camerapicture";
 import { MainContainer } from "../../components/MainContainer";
 import { Button } from "../../components/UI-kit/Button";
@@ -89,7 +89,7 @@ export const CreatePostsScreen = ({ navigation }) => {
           Опубликовать
         </Button>
       </View>
-      {pictureUri && <RemoveButton onClick={() => setPictureUri(null)} />}
+      <RemoveButton onClick={() => setPictureUri(null)} />
     </MainContainer>
   );
 };

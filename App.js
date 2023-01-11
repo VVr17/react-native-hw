@@ -1,8 +1,13 @@
 import { useFonts } from "expo-font";
-import { NavigationContainer } from "@react-navigation/native";
+import {
+  NavigationContainer,
+  createNavigationContainerRef,
+} from "@react-navigation/native";
 import { useState } from "react";
 import { UserContext } from "./src/hooks/useUser";
 import { useRoute } from "./src/router";
+
+const ref = createNavigationContainerRef();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -12,6 +17,7 @@ export default function App() {
   });
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [routeName, setRouteName] = useState();
 
   const logIn = () => {
     setIsLoggedIn(true);
@@ -21,7 +27,13 @@ export default function App() {
     setIsLoggedIn(false);
   };
 
-  const routing = useRoute(isLoggedIn);
+  const changeRouteName = async () => {
+    const previousRouteName = routeName;
+    const currentRouteName = ref.getCurrentRoute().name;
+    setRouteName(currentRouteName);
+  };
+
+  const routing = useRoute({ isLoggedIn, routeName });
 
   if (!fontsLoaded) {
     return null;
@@ -29,7 +41,15 @@ export default function App() {
 
   return (
     <UserContext.Provider value={{ isLoggedIn, logIn, logOut }}>
-      <NavigationContainer>{routing}</NavigationContainer>
+      <NavigationContainer
+        ref={ref}
+        onReady={() => {
+          setRouteName(ref.getCurrentRoute().name);
+        }}
+        onStateChange={changeRouteName}
+      >
+        {routing}
+      </NavigationContainer>
     </UserContext.Provider>
   );
 }

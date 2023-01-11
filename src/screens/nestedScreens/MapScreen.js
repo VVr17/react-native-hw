@@ -22,7 +22,6 @@ export const MapScreen = ({ route: { params } }) => {
           }}
           mapType="standard"
           minZoomLevel={15}
-          onMapReady={() => console.log("Map is ready")}
         >
           <Marker
             title={title}

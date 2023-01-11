@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { theme } from "../../constants/theme";
 import { Snap } from "./Snap";
 import { Camera } from "expo-camera";

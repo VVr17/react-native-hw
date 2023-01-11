@@ -19,6 +19,7 @@ export const PostsScreen = ({ navigation }) => {
         options={{
           headerTitleAlign: "center",
           headerStyle: { ...styles.header },
+          headerTitle: () => <Text style={styles.title}>Публикации</Text>,
           headerRight: () => (
             <HeaderIconButton
               name="logout"
@@ -27,7 +28,6 @@ export const PostsScreen = ({ navigation }) => {
               }}
             />
           ),
-          headerTitle: () => <Text style={styles.title}>Публикации</Text>,
         }}
       />
       <NestedScreen.Screen
