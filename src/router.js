@@ -1,23 +1,22 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { LoginScreen } from "./screens/auth/LoginScreen";
-import { RegistrationScreen } from "./screens/auth/RegistrationScreen";
-import { PostsScreen } from "./screens/mainScreen/PostsScreen";
-import { CreatePostsScreen } from "./screens/mainScreen/CreatePostsScreen";
-import { ProfileScreen } from "./screens/mainScreen/ProfileScreen";
-import { theme } from "./constants/theme";
 import { StyleSheet, Text, View } from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { CreatePostsScreen } from "./screens/mainScreen/CreatePostsScreen";
 import { HeaderIconButton } from "./components/UI-kit/HeaderIconButton";
+import { LoginScreen } from "./screens/auth/LoginScreen";
+import { ProfileScreen } from "./screens/mainScreen/ProfileScreen";
+import { PostsScreen } from "./screens/mainScreen/PostsScreen";
+import { RegistrationScreen } from "./screens/auth/RegistrationScreen";
+import { theme } from "./constants/theme";
 
 const AuthStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
-export const useRoute = ({ routeName, user }) => {
+export const useRoute = ({ routeName, isSignedIn }) => {
   const hideTab = routeName === "Comments" || routeName === "Map";
 
-  const isLoggedIn = false;
-  if (!isLoggedIn) {
+  if (!isSignedIn) {
     return (
       <AuthStack.Navigator initialRouteName="Login">
         <AuthStack.Screen
@@ -58,7 +57,7 @@ export const useRoute = ({ routeName, user }) => {
                   : "transparent",
               }}
             >
-              <MaterialCommunityIcons
+              <Icon
                 name="view-grid-outline"
                 color={
                   focused
@@ -95,7 +94,7 @@ export const useRoute = ({ routeName, user }) => {
                   : "transparent",
               }}
             >
-              <MaterialCommunityIcons
+              <Icon
                 name="plus-thick"
                 color={
                   focused
@@ -122,7 +121,7 @@ export const useRoute = ({ routeName, user }) => {
                   : "transparent",
               }}
             >
-              <MaterialCommunityIcons
+              <Icon
                 name="account-outline"
                 color={
                   focused

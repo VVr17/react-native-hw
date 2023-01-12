@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, Image } from "react-native";
 import { useSelector } from "react-redux";
-import { theme } from "../constants/theme";
 import { selectUser } from "../redux/auth/authSelector";
+import { theme } from "../constants/theme";
 
 export const UserCard = () => {
   const { login, email } = useSelector(selectUser);

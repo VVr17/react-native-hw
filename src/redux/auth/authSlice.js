@@ -4,7 +4,7 @@ const initialAuthState = {
   userId: null,
   login: null,
   email: null,
-  stateChange: null,
+  isSignedIn: false,
 };
 
 export const authSlice = createSlice({
@@ -17,13 +17,17 @@ export const authSlice = createSlice({
       email: payload.email,
       login: payload.login,
     }),
-    authStateChange: (state, { payload }) => ({
+    authIsSignedIn: (state, { payload }) => ({
       ...state,
-      stateChange: payload.stateChange,
+      isSignedIn: payload.isSignedIn,
+    }),
+    authSignOut: (state) => ({
+      ...initialAuthState,
     }),
   },
 });
 
 export const auth = authSlice.name;
-export const { updateUserProfile } = authSlice.actions;
+export const { updateUserProfile, authIsSignedIn, authSignOut } =
+  authSlice.actions;
 export const authReducer = authSlice.reducer;

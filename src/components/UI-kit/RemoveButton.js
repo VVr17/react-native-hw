@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { theme } from "../../constants/theme";
 
 export const RemoveButton = ({ onClick }) => {
@@ -9,7 +9,7 @@ export const RemoveButton = ({ onClick }) => {
       activeOpacity={0.6}
       onPress={onClick}
     >
-      <MaterialCommunityIcons
+      <Icon
         name="trash-can-outline"
         color={theme.colors.placeholder}
         size={26}

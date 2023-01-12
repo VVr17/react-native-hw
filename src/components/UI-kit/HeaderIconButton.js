@@ -1,5 +1,5 @@
 import { TouchableOpacity } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { theme } from "../../constants/theme";
 
 export const HeaderIconButton = ({ name, styles, onClick }) => {
@@ -14,11 +14,7 @@ export const HeaderIconButton = ({ name, styles, onClick }) => {
       activeOpacity={0.6}
       onPress={onClick}
     >
-      <MaterialCommunityIcons
-        name={name}
-        color={theme.colors.placeholder}
-        size={26}
-      />
+      <Icon name={name} color={theme.colors.placeholder} size={26} />
     </TouchableOpacity>
   );
 };

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Dimensions } from "react-native";
-import { theme } from "../../constants/theme";
-import { Snap } from "./Snap";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { PreloadedPicture } from "./PreloadedPicture";
+import { theme } from "../../constants/theme";
+import { Snap } from "./Snap";
 
 export const CameraPicture = ({ pictureUri, setPictureUri }) => {
   const [hasPermission, setHasPermission] = useState(null);

@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { TextInput, View, StyleSheet, Text } from "react-native";
+import { TextInput, View, StyleSheet } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome5";
 import { theme } from "../../constants/theme";
-import IconLocation from "react-native-vector-icons/FontAwesome5";
 
 export const PostInput = ({
-  isKeyboardShown,
   onInputChange,
   value,
   onInputFocus,
@@ -43,7 +42,7 @@ export const PostInput = ({
       />
 
       {hasIcon && (
-        <IconLocation
+        <Icon
           style={styles.inputIcon}
           name="map-marker-alt"
           size={26}

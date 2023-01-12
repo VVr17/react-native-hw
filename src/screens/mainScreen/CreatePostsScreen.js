@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Keyboard, StyleSheet, View } from "react-native";
+import { Keyboard, View } from "react-native";
+import * as Location from "expo-location";
+import { Button } from "../../components/UI-kit/Button";
 import { CameraPicture } from "../../components/CameraPicture/Camerapicture";
 import { MainContainer } from "../../components/MainContainer";
-import { Button } from "../../components/UI-kit/Button";
 import { PostInput } from "../../components/UI-kit/PostInput";
 import { RemoveButton } from "../../components/UI-kit/RemoveButton";
-import * as Location from "expo-location";
+import { uploadImageToStorage } from "../../firebase/uploadImageToStorage";
 
 export const CreatePostsScreen = ({ navigation }) => {
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
@@ -43,6 +44,8 @@ export const CreatePostsScreen = ({ navigation }) => {
     const requiredDataMissing = !locationName || !pictureUri || !title;
 
     if (requiredDataMissing) return;
+
+    uploadImageToStorage(pictureUri);
 
     navigation.navigate("DefaultPosts", {
       locationName,

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Dimensions, Image, StyleSheet, View } from "react-native";
-import { theme } from "../constants/theme";
 import { AddButton } from "./UI-kit/AddButton";
+import { theme } from "../constants/theme";
 
 export const UserImage = ({ isActive }) => {
   const [{ width }, setDimensions] = useState({

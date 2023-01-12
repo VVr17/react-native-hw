@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { theme } from "../../constants/theme";
-import IconFa from "react-native-vector-icons/FontAwesome5";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 export const PostLocation = ({ children, onClick }) => {
   return (
@@ -9,7 +9,7 @@ export const PostLocation = ({ children, onClick }) => {
       activeOpacity={0.6}
       onPress={onClick}
     >
-      <IconFa
+      <Icon
         style={styles.icon}
         name="map-marker-alt"
         size={26}

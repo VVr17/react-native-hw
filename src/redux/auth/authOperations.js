@@ -2,10 +2,11 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
-import { auth } from "../../../firebase/config";
+import { auth } from "../../firebase/config";
+import { authIsSignedIn, authSignOut, updateUserProfile } from "./authSlice";
 import { updateProfile } from "firebase/auth";
-import { updateUserProfile } from "./authSlice";
 
 export const authSingUpUser =
   ({ login, email, password }) =>
@@ -19,41 +20,40 @@ export const authSingUpUser =
       });
 
       const { uid, displayName, email: mail } = auth.currentUser;
-      dispatch(
-        updateUserProfile({
-          userId: uid,
-          login: displayName,
-          email: mail,
-        })
-      );
+      const currentUser = {
+        userId: uid,
+        login: displayName,
+        email: mail,
+      };
+      dispatch(updateUserProfile(currentUser));
     } catch (error) {
-      const errorMessage = error.message;
-      console.log("errorMessage", errorMessage);
+      console.log(error.message);
     }
   };
 
 export const authSignInUser =
   ({ email, password }) =>
-  async (dispatch) => {
+  async () => {
     try {
-      const { user } = await signInWithEmailAndPassword(auth, email, password);
-
-      dispatch(updateUserProfile({ userId: user.uid, email: user.email }));
+      await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      const errorMessage = error.message;
-      console.log("errorMessage", errorMessage);
+      console.log(error.message);
     }
   };
 
-export const authSignOutUser = () => (dispatch) => {};
+export const authSignOutUser = () => async (dispatch) => {
+  await signOut(auth);
+  dispatch(authSignOut());
+};
 
-export const authStateChangeUser = async () => (dispatch) => {
+export const authStateChangeUser = () => (dispatch) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      console.log("signed in");
-      // setUser(user);
-    } else {
-      console.log("signed out");
+      const { uid, displayName, email } = user;
+      const currentUser = { userId: uid, login: displayName, email };
+
+      dispatch(authIsSignedIn({ isSignedIn: true }));
+      dispatch(updateUserProfile(currentUser));
     }
   });
 };

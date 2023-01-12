@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { theme } from "../../constants/theme";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import IconCross from "react-native-vector-icons/FontAwesome5";
+import { theme } from "../../constants/theme";
 
 export const AddButton = ({ onClick, isActive }) => {
   return (

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TextInput, View, StyleSheet } from "react-native";
-import { theme } from "../../constants/theme";
 import { CommentButton } from "./CommentButton";
+import { theme } from "../../constants/theme";
 
 export const CommentInput = ({
   onInputChange,

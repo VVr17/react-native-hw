@@ -1,13 +1,17 @@
+import { useDispatch } from "react-redux";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet, Text } from "react-native";
-import { HeaderIconButton } from "../../components/UI-kit/HeaderIconButton";
+import { authSignOutUser } from "../../redux/auth/authOperations";
 import { CommentsScreen } from "../nestedScreens/CommentsScreen";
 import { DefaultPosts } from "../nestedScreens/DefaultPosts";
+import { HeaderIconButton } from "../../components/UI-kit/HeaderIconButton";
 import { MapScreen } from "../nestedScreens/MapScreen";
 
 const NestedScreen = createStackNavigator();
 
 export const PostsScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   return (
     <NestedScreen.Navigator initialRouteName="Posts">
       <NestedScreen.Screen
@@ -20,9 +24,7 @@ export const PostsScreen = ({ navigation }) => {
           headerRight: () => (
             <HeaderIconButton
               name="logout"
-              onClick={() => {
-                // logOut();
-              }}
+              onClick={() => dispatch(authSignOutUser())}
             />
           ),
         }}

@@ -9,8 +9,8 @@ import {
   View,
 } from "react-native";
 import { Comment } from "../../components/Comment";
-import { MainContainer } from "../../components/MainContainer";
 import { CommentInput } from "../../components/UI-kit/CommentInput";
+import { MainContainer } from "../../components/MainContainer";
 import { theme } from "../../constants/theme";
 
 const dimensions = Dimensions.get("window");

@@ -1,6 +1,6 @@
-import { MainContainer } from "../../components/MainContainer";
-import MapView, { Marker } from "react-native-maps";
 import { useEffect, useState } from "react";
+import MapView, { Marker } from "react-native-maps";
+import { MainContainer } from "../../components/MainContainer";
 
 export const MapScreen = ({ route: { params } }) => {
   const [{ location, title }, setLocation] = useState([]);

@@ -1,15 +1,11 @@
 import { TouchableOpacity, StyleSheet } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { theme } from "../../constants/theme";
 
 export const Snap = ({ onClick }) => {
   return (
     <TouchableOpacity onPress={onClick} style={styles.snapButton}>
-      <MaterialCommunityIcons
-        name="camera"
-        size={26}
-        color={`${theme.colors.placeholder}`}
-      />
+      <Icon name="camera" size={26} color={`${theme.colors.placeholder}`} />
     </TouchableOpacity>
   );
 };

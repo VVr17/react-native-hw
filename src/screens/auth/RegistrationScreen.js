@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { Keyboard } from "react-native";
+import { useDispatch } from "react-redux";
+import { authSingUpUser } from "../../redux/auth/authOperations";
 import { Button } from "../../components/UI-kit/Button";
 import { Container } from "../../components/Container";
 import { ExtraButton } from "../../components/UI-kit/ExtraButton";
 import { Form } from "../../components/Form";
+import { Keyboard } from "react-native";
 import { Input } from "../../components/UI-kit/Input";
 import { Title } from "../../components/Title";
 import { UserImage } from "../../components/UserImage";
-import { useDispatch } from "react-redux";
-import { authSingUpUser } from "../../redux/auth/authOperations";
 
 const initialState = {
   login: "",

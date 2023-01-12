@@ -1,8 +1,8 @@
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
-import { theme } from "../../constants/theme";
+import { useNavigation } from "@react-navigation/native";
 import { PostData } from "./PostData";
 import { PostLocation } from "./PostLocation";
-import { useNavigation } from "@react-navigation/native";
+import { theme } from "../../constants/theme";
 
 const dimensions = Dimensions.get("window");
 

@@ -1,22 +1,26 @@
+import { useDispatch, useSelector } from "react-redux";
 import { StyleSheet, Text, View } from "react-native";
 import { Container } from "../../components/Container";
 import { PostCard } from "../../components/PostCard/PostCard";
 import { HeaderIconButton } from "../../components/UI-kit/HeaderIconButton";
-import { UserImage } from "../../components/UserImage";
 import { theme } from "../../constants/theme";
+import { selectUser } from "../../redux/auth/authSelector";
+import { UserImage } from "../../components/UserImage";
+
 export const ProfileScreen = () => {
+  const dispatch = useDispatch();
+  const { login } = useSelector(selectUser);
+
   return (
     <Container>
       <View style={styles.container}>
         <UserImage isActive={false} />
         <HeaderIconButton
           name="logout"
-          onClick={() => {
-            // logOut();
-          }}
+          onClick={() => dispatch(authSignOutUser())}
           styles={styles.icon}
         />
-        <Text style={styles.name}>Natali Romanova</Text>
+        <Text style={styles.name}>{login}</Text>
         {/* <PostCard screen="profile" /> */}
       </View>
     </Container>

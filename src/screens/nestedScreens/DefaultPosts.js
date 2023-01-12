@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { FlatList, Image, Text, View } from "react-native";
-import { MainContainer } from "../../components/MainContainer";
+import { FlatList, View } from "react-native";
 import { PostCard } from "../../components/PostCard/PostCard";
+import { MainContainer } from "../../components/MainContainer";
 import { UserCard } from "../../components/UserCard";
 
 export const DefaultPosts = ({ route: { params }, navigation }) => {
