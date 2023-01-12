@@ -3,7 +3,6 @@ import { auth, authReducer } from "./auth/authSlice";
 
 const rootReducer = combineReducers({
   [auth]: authReducer,
-  // posts: postsReducer,
 });
 
 export const store = configureStore({

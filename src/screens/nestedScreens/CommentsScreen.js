@@ -28,11 +28,11 @@ const comments = [
 ];
 
 export const CommentsScreen = ({ route: { params } }) => {
-  const [{ pictureUri, title }, setSetPictureUri] = useState([]);
+  const [{ imageUrl, title }, setSetParams] = useState([]);
   const [comment, setComment] = useState(null);
 
   useEffect(() => {
-    if (params) setSetPictureUri(params);
+    if (params) setSetParams(params);
   }, [params]);
 
   const onSubmit = () => {
@@ -43,9 +43,9 @@ export const CommentsScreen = ({ route: { params } }) => {
   return (
     <MainContainer>
       <View style={styles.imageContainer}>
-        {pictureUri && (
+        {imageUrl && (
           <Image
-            source={{ uri: pictureUri }}
+            source={{ uri: imageUrl }}
             alt={title}
             resizeMode={"cover"}
             style={{ height: 240, width: dimensions.width }}

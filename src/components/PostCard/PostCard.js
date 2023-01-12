@@ -8,14 +8,13 @@ const dimensions = Dimensions.get("window");
 
 export const PostCard = ({ screen, post }) => {
   const navigation = useNavigation();
-
-  const { pictureUri, title, locationName, location } = post;
+  const { imageUrl, title, locationName, location } = post;
 
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         <Image
-          source={{ uri: pictureUri }}
+          source={{ uri: imageUrl }}
           alt={title}
           resizeMode={"cover"}
           style={{ height: 240, width: dimensions.width }}
@@ -26,7 +25,7 @@ export const PostCard = ({ screen, post }) => {
         <PostData
           type="comments"
           screen={screen}
-          onClick={() => navigation.navigate("Comments", { pictureUri, title })}
+          onClick={() => navigation.navigate("Comments", { imageUrl, title })}
         >
           0
         </PostData>

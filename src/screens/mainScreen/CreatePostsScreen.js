@@ -6,9 +6,12 @@ import { CameraPicture } from "../../components/CameraPicture/Camerapicture";
 import { MainContainer } from "../../components/MainContainer";
 import { PostInput } from "../../components/UI-kit/PostInput";
 import { RemoveButton } from "../../components/UI-kit/RemoveButton";
-import { uploadImageToStorage } from "../../firebase/uploadImageToStorage";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/authSelector";
+import { uploadPost } from "../../firebase/uploadPost";
 
 export const CreatePostsScreen = ({ navigation }) => {
+  const { userId } = useSelector(selectUser);
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
   const [pictureUri, setPictureUri] = useState(null);
   const [title, setTitle] = useState(null);
@@ -40,25 +43,31 @@ export const CreatePostsScreen = ({ navigation }) => {
     setIsKeyboardShown(true);
   };
 
+  const setInitialState = () => {
+    setPictureUri(null);
+    setTitle(null);
+    setLocationName(null);
+    setLocation(null);
+  };
+
   const onSubmit = async () => {
     const requiredDataMissing = !locationName || !pictureUri || !title;
 
     if (requiredDataMissing) return;
 
-    uploadImageToStorage(pictureUri);
-
-    navigation.navigate("DefaultPosts", {
-      locationName,
+    const postData = {
+      userId,
       pictureUri,
+      locationName,
       title,
       location,
-    });
-    hideKeyboard();
+    };
 
-    setPictureUri(null);
-    setTitle(null);
-    setLocationName(null);
-    setLocation(null);
+    await uploadPost(postData);
+
+    navigation.navigate("DefaultPosts");
+    hideKeyboard();
+    setInitialState();
   };
 
   const isDisabled = !locationName || !pictureUri || !title;

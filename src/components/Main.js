@@ -36,3 +36,26 @@ export const Main = () => {
     </NavigationContainer>
   );
 };
+
+//! to set loading while auth
+/**
+ *  state = {
+    loading: firebase.auth().currentUser === null,
+    user: firebase.auth().currentUser,
+  };
+
+  componentDidMount() {
+    firebase
+      .auth()
+      .onAuthStateChanged(
+        user => user && this.setState({ user, loading: false })
+      );
+  }
+
+  render() {
+    const { loading, user } = this.state;
+
+    return this.props.children({ loading, user });
+  }
+}
+ */
