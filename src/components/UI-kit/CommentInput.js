@@ -8,8 +8,14 @@ export const CommentInput = ({
   value,
   placeholder,
   onSubmit,
+  onInputFocus,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => {
+    onInputFocus();
+    setIsFocused(true);
+  };
 
   return (
     <View style={styles.inputWrapper}>
@@ -22,7 +28,8 @@ export const CommentInput = ({
         }}
         onChangeText={onInputChange}
         value={value}
-        onFocus={() => setIsFocused(true)}
+        onFocus={handleFocus}
+        onBlur={() => setIsFocused(false)}
         placeholder={placeholder}
         placeholderTextColor={theme.colors.placeholder}
       />

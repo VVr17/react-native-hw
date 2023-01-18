@@ -18,7 +18,6 @@ const firebaseConfig = {
   messagingSenderId: "1041851553275",
   appId: "1:1041851553275:web:c349555b9f6af1855b675e",
   measurementId: "G-3Z2MF4TJG6",
-  // storageBucket: "", //!'[your-storage-bucket-url]'
 };
 
 // Initialize Firebase

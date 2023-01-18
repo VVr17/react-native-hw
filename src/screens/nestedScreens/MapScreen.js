@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import { MainContainer } from "../../components/MainContainer";
 
 export const MapScreen = ({ route: { params } }) => {
-  const [{ location, title }, setLocation] = useState([]);
-
-  useEffect(() => {
-    if (params) setLocation(params);
-  }, [params]);
+  const {
+    location: { latitude, longitude },
+    title,
+  } = params;
 
   return (
     <MainContainer>
@@ -15,8 +13,8 @@ export const MapScreen = ({ route: { params } }) => {
         <MapView
           style={{ flex: 1 }}
           initialRegion={{
-            latitude: location.latitude,
-            longitude: location.longitude,
+            latitude,
+            longitude,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421,
           }}
@@ -26,8 +24,8 @@ export const MapScreen = ({ route: { params } }) => {
           <Marker
             title={title}
             coordinate={{
-              latitude: location.latitude,
-              longitude: location.longitude,
+              latitude,
+              longitude,
             }}
           />
         </MapView>

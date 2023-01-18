@@ -19,6 +19,7 @@ export const Main = () => {
     dispatch(authStateChangeUser());
   }, [dispatch]);
 
+  // get current route name
   const changeRouteName = async () => {
     const currentRouteName = ref.getCurrentRoute().name;
     setRouteName(currentRouteName);

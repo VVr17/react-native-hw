@@ -10,6 +10,7 @@ export const DefaultPosts = () => {
   const [posts, setPosts] = useState([]);
 
   const getPosts = () => {
+    // receive posts from db
     onSnapshot(collection(db, "posts"), (data) =>
       setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
     );
