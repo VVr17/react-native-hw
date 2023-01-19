@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import { theme } from "../constants/theme";
 
-export const Comment = ({ comment, index }) => {
-  const { desc } = comment;
+export const Comment = ({ data, index }) => {
+  const { comment, userLogin } = data;
   const isOdd = index % 2 === 0;
 
   return (
@@ -27,10 +27,8 @@ export const Comment = ({ comment, index }) => {
           borderTopLeftRadius: isOdd ? 0 : 6,
         }}
       >
-        <Text style={styles.text}>{desc}</Text>
-        <Text style={{ ...styles.date, textAlign: isOdd ? "right" : "left" }}>
-          date
-        </Text>
+        <Text style={styles.text}>{comment}</Text>
+        <Text style={{ ...styles.login }}>{userLogin}</Text>
       </View>
     </View>
   );
@@ -65,8 +63,10 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto-Regular",
   },
 
-  date: {
+  login: {
     color: `${theme.colors.placeholder}`,
     fontSize: 10,
+    textAlign: "right",
+    //  textAlign: isOdd ? "right" : "left"
   },
 });

@@ -12,30 +12,33 @@ import { Comment } from "../../components/Comment";
 import { CommentInput } from "../../components/UI-kit/CommentInput";
 import { MainContainer } from "../../components/MainContainer";
 import { theme } from "../../constants/theme";
-import { uploadComment } from "../../firebase/uploadComment";
+import { addComment } from "../../firebase/addComment";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelector";
+import { onSnapshot, collection, doc } from "firebase/firestore";
+import { db } from "../../firebase/config";
 
 const dimensions = Dimensions.get("window");
-// const comments = [
-//   {
-//     desc: "Really love your most recent photo. I’ve been trying to capture the same thing for a few months and would love some tips!",
-//   },
-//   {
-//     desc: "A fast 50mm like f1.8 would help with the bokeh. I’ve been using primes as they tend to get a bit sharper images.",
-//   },
-//   {
-//     desc: "A fast 50mm like f1.8 would help with the bokeh. I’ve been using primes as they tend to get a bit sharper images.",
-//   },
-//   { desc: "Thank you! That was very helpful!" },
-// ];
 
 export const CommentsScreen = ({ route: { params } }) => {
-  const { userId } = useSelector(selectUser);
+  const { login: userLogin } = useSelector(selectUser);
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
   const { imageUrl, title, postId } = params;
-  const [comment, setComment] = useState(null);
-  const comments = [];
+  const [currentComment, setCurrentComment] = useState(null);
+  const [allComments, setAllComments] = useState(null);
+
+  const getComments = () => {
+    const postRef = doc(db, "posts", postId); // find post
+    const commentsListRef = collection(postRef, "comments"); // find comments collection
+
+    onSnapshot(commentsListRef, (data) =>
+      setAllComments(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    );
+  };
+
+  useEffect(() => {
+    getComments();
+  }, []);
 
   const hideKeyboard = () => {
     setIsKeyboardShown(false);
@@ -46,14 +49,13 @@ export const CommentsScreen = ({ route: { params } }) => {
     setIsKeyboardShown(true);
   };
 
-  const addComment = async () => {
-    // console.log("submit");
-    // console.log("comment", comment);
+  const onSubmit = async () => {
+    if (!currentComment) return;
 
-    await uploadComment({ postId, userId, comment });
+    await addComment({ postId, userLogin, comment: currentComment });
 
     hideKeyboard();
-    setComment(null);
+    setCurrentComment(null);
   };
 
   return (
@@ -71,26 +73,30 @@ export const CommentsScreen = ({ route: { params } }) => {
         </View>
       )}
 
-      {comments.length === 0 ? (
-        <Text style={styles.text}>There are no comments</Text>
-      ) : (
-        <FlatList
-          style={{ marginBottom: 32 }}
-          data={comments}
-          renderItem={({ item, index }) => (
-            <Comment comment={item} index={index} />
+      {!isKeyboardShown && (
+        <>
+          {allComments?.length === 0 ? (
+            <Text style={styles.text}>There are no comments</Text>
+          ) : (
+            <FlatList
+              style={{ marginBottom: 32 }}
+              data={allComments}
+              renderItem={({ item, index }) => (
+                <Comment data={item} index={index} />
+              )}
+              keyExtractor={(item, index) => index}
+              ItemSeparatorComponent={() => <View style={{ height: 24 }} />}
+            />
           )}
-          keyExtractor={(item, index) => index}
-          ItemSeparatorComponent={() => <View style={{ height: 24 }} />}
-        />
+        </>
       )}
 
       <CommentInput
         onInputFocus={onInputFocus}
-        onInputChange={(comment) => setComment(comment)}
-        value={comment}
+        onInputChange={(comment) => setCurrentComment(comment)}
+        value={currentComment}
         placeholder="Комментировать..."
-        onSubmit={addComment}
+        onSubmit={onSubmit}
       />
     </MainContainer>
   );

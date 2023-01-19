@@ -26,7 +26,13 @@ export const PostData = ({ children, type, screen, onClick }) => {
       )}
       {type === "likes" && (
         <IconFa
-          style={{ ...styles.icon, color: `${theme.colors.accent}` }}
+          style={{
+            ...styles.icon,
+            color:
+              screen === "posts"
+                ? `${theme.colors.placeholder}`
+                : `${theme.colors.accent}`,
+          }}
           name="thumbs-up"
           size={26}
           color={`${theme.colors.placeholder}`}

@@ -14,6 +14,7 @@ export const Input = ({
   isLast = false,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const [isSecured, setIsSecured] = useState(isPassword);
 
   const handleFocus = () => {
     onInputFocus();
@@ -39,12 +40,19 @@ export const Input = ({
         value={value}
         onFocus={handleFocus}
         onBlur={() => setIsFocused(false)}
-        secureTextEntry={isPassword}
+        secureTextEntry={isSecured}
         placeholder={placeholder}
         placeholderTextColor={theme.colors.placeholder}
       />
       {hasExtraButton && (
-        <ExtraButton extraStyles={styles.inputButton}>Показать</ExtraButton>
+        <ExtraButton
+          extraStyles={styles.inputButton}
+          onClick={() => {
+            setIsSecured((prev) => !prev);
+          }}
+        >
+          Показать
+        </ExtraButton>
       )}
     </View>
   );

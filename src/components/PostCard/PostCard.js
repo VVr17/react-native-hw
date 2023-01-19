@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { onSnapshot, collection, doc } from "firebase/firestore";
+import { db } from "../../firebase/config";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { PostData } from "./PostData";
@@ -6,9 +9,22 @@ import { theme } from "../../constants/theme";
 
 const dimensions = Dimensions.get("window");
 
-export const PostCard = ({ screen, post }) => {
+export const PostCard = ({ screen, post, comments }) => {
   const navigation = useNavigation();
+  const [allComments, setAllComments] = useState([]);
   const { imageUrl, title, locationName, location, id } = post;
+
+  const getComments = () => {
+    const postRef = doc(db, "posts", id); // find post
+    const commentsListRef = collection(postRef, "comments"); // find comments collection
+    onSnapshot(commentsListRef, (data) =>
+      setAllComments(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    );
+  };
+
+  useEffect(() => {
+    getComments();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -29,14 +45,11 @@ export const PostCard = ({ screen, post }) => {
             navigation.navigate("Comments", { imageUrl, title, postId: id })
           }
         >
-          0
+          {allComments.length}
         </PostData>
 
-        {screen === "profile" && (
-          <PostData type="likes" screen={screen}>
-            150
-          </PostData>
-        )}
+        {/* <PostData type="likes" screen={screen}>0</PostData> */}
+
         <PostLocation
           onClick={() => navigation.navigate("Map", { title, location })}
         >

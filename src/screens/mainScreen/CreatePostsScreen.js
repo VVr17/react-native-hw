@@ -8,7 +8,7 @@ import { PostInput } from "../../components/UI-kit/PostInput";
 import { RemoveButton } from "../../components/UI-kit/RemoveButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelector";
-import { uploadPost } from "../../firebase/uploadPost";
+import { addPost } from "../../firebase/addPost";
 
 export const CreatePostsScreen = ({ navigation }) => {
   const { userId } = useSelector(selectUser);
@@ -17,6 +17,7 @@ export const CreatePostsScreen = ({ navigation }) => {
   const [title, setTitle] = useState(null);
   const [locationName, setLocationName] = useState(null);
   const [location, setLocation] = useState({ latitude: null, longitude: null });
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getLocation = async () => {
@@ -51,6 +52,8 @@ export const CreatePostsScreen = ({ navigation }) => {
   };
 
   const onSubmit = async () => {
+    if (isLoading) return;
+
     const requiredDataMissing = !locationName || !pictureUri || !title;
 
     if (requiredDataMissing) return;
@@ -63,14 +66,17 @@ export const CreatePostsScreen = ({ navigation }) => {
       location,
     };
 
-    await uploadPost(postData);
+    setIsLoading(true);
 
+    await addPost(postData);
+
+    setIsLoading(false);
     navigation.navigate("DefaultPosts");
     hideKeyboard();
     setInitialState();
   };
 
-  const isDisabled = !locationName || !pictureUri || !title;
+  const isDisabled = !locationName || !pictureUri || !title || isLoading;
 
   return (
     <MainContainer onClick={hideKeyboard}>

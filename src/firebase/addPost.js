@@ -2,7 +2,7 @@ import { addDoc, collection } from "firebase/firestore";
 import { db } from "./config";
 import { uploadImage } from "./uploadImage";
 
-export const uploadPost = async (postData) => {
+export const addPost = async (postData) => {
   try {
     const { userId, pictureUri, locationName, title, location } = postData;
     const imageUrl = await uploadImage(pictureUri);

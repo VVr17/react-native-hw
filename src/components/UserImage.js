@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Dimensions, Image, StyleSheet, View } from "react-native";
 import { AddButton } from "./UI-kit/AddButton";
 import { theme } from "../constants/theme";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 export const UserImage = ({ isActive }) => {
   const [{ width }, setDimensions] = useState({
@@ -26,11 +27,8 @@ export const UserImage = ({ isActive }) => {
           left: (width - 120) / 2,
         }}
       >
-        {/* <Image
-          source={require("../assets/images/template.jpg")}
-          style={styles.image}
-        /> */}
-        <AddButton isActive={isActive} />
+        <Icon name="house-user" color={theme.colors.accent} size={50} />
+        {/* <AddButton isActive={isActive} /> */}
       </View>
     </>
   );
@@ -43,6 +41,8 @@ const styles = StyleSheet.create({
 
     width: 120,
     height: 120,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: `${theme.colors.inputBackground}`,
     borderRadius: 16,
   },
@@ -50,11 +50,3 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
 });
-
-/* <Image
-        source={require("../assets/images/bgImage.png")}
-              style={{
-        ...styles.imageWrapper,
-        left: (width - 120) / 2,
-      }}
-      /> */

@@ -2,6 +2,7 @@ import { StyleSheet, View, Text, Image } from "react-native";
 import { useSelector } from "react-redux";
 import { selectUser } from "../redux/auth/authSelector";
 import { theme } from "../constants/theme";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 export const UserCard = () => {
   const { login, email } = useSelector(selectUser);
@@ -9,10 +10,7 @@ export const UserCard = () => {
   return (
     <View style={styles.container}>
       <View style={styles.imageWrapper}>
-        <Image
-          source={require("../assets/images/template.jpg")}
-          style={styles.imageWrapper}
-        />
+        <Icon name="account-lock" color={theme.colors.placeholder} size={36} />
       </View>
       <View>
         <Text style={styles.name}>{login}</Text>
@@ -32,6 +30,8 @@ const styles = StyleSheet.create({
   imageWrapper: {
     width: 60,
     height: 60,
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: `${theme.colors.inputBackground}`,
     borderRadius: 16,
     marginRight: 8,
