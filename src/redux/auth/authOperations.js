@@ -16,7 +16,6 @@ export const authSingUpUser =
 
       await updateProfile(auth.currentUser, {
         displayName: login,
-        // photoURL: "https://example.com/jane-q-user/profile.jpg",
       });
 
       const { uid, displayName, email: mail } = auth.currentUser;
