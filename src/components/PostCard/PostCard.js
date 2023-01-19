@@ -9,7 +9,7 @@ import { theme } from "../../constants/theme";
 
 const dimensions = Dimensions.get("window");
 
-export const PostCard = ({ screen, post, comments }) => {
+export const PostCard = ({ screen, post }) => {
   const navigation = useNavigation();
   const [allComments, setAllComments] = useState([]);
   const { imageUrl, title, locationName, location, id } = post;
