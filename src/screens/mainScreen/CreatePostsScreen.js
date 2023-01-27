@@ -104,7 +104,7 @@ export const CreatePostsScreen = ({ navigation }) => {
           isLast={true}
         />
         <Button onSubmit={onSubmit} disabled={isDisabled}>
-          Опубликовать
+          {isLoading ? `Публикуем...` : "Опубликовать"}
         </Button>
       </View>
       <RemoveButton onClick={() => setPictureUri(null)} />
