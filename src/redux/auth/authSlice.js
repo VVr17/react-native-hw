@@ -4,6 +4,7 @@ const initialAuthState = {
   userId: null,
   login: null,
   email: null,
+  avatarUrl: null,
   isSignedIn: false,
 };
 
@@ -16,6 +17,7 @@ export const authSlice = createSlice({
       userId: payload.userId,
       email: payload.email,
       login: payload.login,
+      avatarUrl: payload.avatarUrl,
     }),
     authIsSignedIn: (state, { payload }) => ({
       ...state,

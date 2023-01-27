@@ -21,7 +21,7 @@ import { db } from "../../firebase/config";
 const dimensions = Dimensions.get("window");
 
 export const CommentsScreen = ({ route: { params } }) => {
-  const { login: userLogin } = useSelector(selectUser);
+  const { login: userLogin, avatarUrl: userAvatar } = useSelector(selectUser);
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
   const { imageUrl, title, postId } = params;
   const [currentComment, setCurrentComment] = useState(null);
@@ -52,7 +52,12 @@ export const CommentsScreen = ({ route: { params } }) => {
   const onSubmit = async () => {
     if (!currentComment) return;
 
-    await addComment({ postId, userLogin, comment: currentComment });
+    await addComment({
+      postId,
+      userLogin,
+      userAvatar,
+      comment: currentComment,
+    });
 
     hideKeyboard();
     setCurrentComment(null);

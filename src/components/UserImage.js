@@ -4,7 +4,7 @@ import { AddButton } from "./UI-kit/AddButton";
 import { theme } from "../constants/theme";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
-export const UserImage = ({ isActive }) => {
+export const UserImage = ({ isActive, avatarUrl, login }) => {
   const [{ width }, setDimensions] = useState({
     width: Dimensions.get("window").width,
   });
@@ -27,7 +27,11 @@ export const UserImage = ({ isActive }) => {
           left: (width - 120) / 2,
         }}
       >
-        <Icon name="house-user" color={theme.colors.accent} size={50} />
+        {avatarUrl ? (
+          <Image source={{ uri: avatarUrl }} alt={login} style={styles.image} />
+        ) : (
+          <Icon name="house-user" color={theme.colors.accent} size={50} />
+        )}
         {/* <AddButton isActive={isActive} /> */}
       </View>
     </>
@@ -46,7 +50,11 @@ const styles = StyleSheet.create({
     backgroundColor: `${theme.colors.inputBackground}`,
     borderRadius: 16,
   },
+
   image: {
+    width: 120,
+    height: 120,
+    backgroundColor: `${theme.colors.inputBackground}`,
     borderRadius: 16,
   },
 });

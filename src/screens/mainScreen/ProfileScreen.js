@@ -13,7 +13,7 @@ import { authSignOutUser } from "../../redux/auth/authOperations";
 
 export const ProfileScreen = () => {
   const dispatch = useDispatch();
-  const { login, userId } = useSelector(selectUser);
+  const { login, userId, avatarUrl } = useSelector(selectUser);
   const [posts, setPosts] = useState([]);
 
   const getUserPosts = async () => {
@@ -34,7 +34,7 @@ export const ProfileScreen = () => {
   return (
     <Container>
       <View style={styles.container}>
-        <UserImage isActive={false} />
+        <UserImage isActive={false} avatarUrl={avatarUrl} login={login} />
         <HeaderIconButton
           name="logout"
           onClick={() => dispatch(authSignOutUser())}

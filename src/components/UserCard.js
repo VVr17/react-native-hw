@@ -5,12 +5,24 @@ import { theme } from "../constants/theme";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 export const UserCard = () => {
-  const { login, email } = useSelector(selectUser);
+  const { login, email, avatarUrl } = useSelector(selectUser);
 
   return (
     <View style={styles.container}>
       <View style={styles.imageWrapper}>
-        <Icon name="account-lock" color={theme.colors.placeholder} size={36} />
+        {avatarUrl ? (
+          <Image
+            source={{ uri: avatarUrl }}
+            alt={login}
+            style={styles.imageWrapper}
+          />
+        ) : (
+          <Icon
+            name="account-lock"
+            color={theme.colors.placeholder}
+            size={36}
+          />
+        )}
       </View>
       <View>
         <Text style={styles.name}>{login}</Text>

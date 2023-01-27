@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { theme } from "../constants/theme";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 export const Comment = ({ data, index }) => {
-  const { comment, userLogin } = data;
+  const { comment, userLogin, userAvatar } = data;
   const isOdd = index % 2 === 0;
 
   return (
@@ -18,7 +19,21 @@ export const Comment = ({ data, index }) => {
           marginRight: isOdd ? 16 : 0,
           marginLeft: isOdd ? 0 : 16,
         }}
-      ></View>
+      >
+        {userAvatar ? (
+          <Image
+            source={{ uri: userAvatar }}
+            alt={userLogin}
+            style={styles.avatarImage}
+          />
+        ) : (
+          <Icon
+            name="account-lock"
+            color={theme.colors.placeholder}
+            size={20}
+          />
+        )}
+      </View>
 
       <View
         style={{
@@ -46,6 +61,14 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 1,
     borderColor: `${theme.colors.border}`,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  avatarImage: {
+    height: 28,
+    width: 28,
+    borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
   },
