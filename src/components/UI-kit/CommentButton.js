@@ -1,14 +1,18 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { ActivityIndicator, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { theme } from "../../constants/theme";
 
-export const CommentButton = ({ onClick }) => (
+export const CommentButton = ({ onClick, isLoading }) => (
   <TouchableOpacity
     style={styles.iconWrapper}
     activeOpacity={0.6}
     onPress={onClick}
   >
-    <Icon name="arrow-up" size={26} style={styles.icon} />
+    {isLoading ? (
+      <ActivityIndicator size="small" color={theme.colors.mainBackground} />
+    ) : (
+      <Icon name="arrow-up" size={26} style={styles.icon} />
+    )}
   </TouchableOpacity>
 );
 

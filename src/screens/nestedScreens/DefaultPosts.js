@@ -22,14 +22,6 @@ export const DefaultPosts = () => {
 
   return (
     <MainContainer>
-      <Image
-        source="//www.gravatar.com/avatar/390105a4ab80cde30259b6c6bd055be4?s=250&r=x&d=retro"
-        // source={{ uri: avatarUrl }}
-        // alt={login}
-        alt="avatar"
-        // resizeMode={"cover"}
-        // style={styles.imageWrapper}
-      />
       <UserCard />
       {posts.length === 0 ? (
         <View />

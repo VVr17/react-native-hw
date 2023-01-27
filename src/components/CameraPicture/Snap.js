@@ -1,11 +1,15 @@
-import { TouchableOpacity, StyleSheet } from "react-native";
+import { TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { theme } from "../../constants/theme";
 
-export const Snap = ({ onClick }) => {
+export const Snap = ({ onClick, isLoading }) => {
   return (
     <TouchableOpacity onPress={onClick} style={styles.snapButton}>
-      <Icon name="camera" size={26} color={`${theme.colors.placeholder}`} />
+      {isLoading ? (
+        <ActivityIndicator size="large" color={theme.colors.accent} />
+      ) : (
+        <Icon name="camera" size={26} color={`${theme.colors.placeholder}`} />
+      )}
     </TouchableOpacity>
   );
 };

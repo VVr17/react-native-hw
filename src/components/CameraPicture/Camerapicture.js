@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { Camera } from "expo-camera";
 import * as MediaLibrary from "expo-media-library";
 import { PreloadedPicture } from "./PreloadedPicture";
@@ -9,6 +9,8 @@ import { Snap } from "./Snap";
 export const CameraPicture = ({ pictureUri, setPictureUri }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [cameraRef, setCameraRef] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  console.log("isLoading", isLoading);
 
   useEffect(() => {
     (async () => {
@@ -20,11 +22,16 @@ export const CameraPicture = ({ pictureUri, setPictureUri }) => {
   }, []);
 
   const takePicture = async () => {
+    if (isLoading) return;
+
     if (cameraRef) {
+      setIsLoading(true);
+
       const { uri } = await cameraRef.takePictureAsync();
       await MediaLibrary.createAssetAsync(uri);
 
       setPictureUri(uri);
+      setIsLoading(false);
     }
   };
 
@@ -39,7 +46,7 @@ export const CameraPicture = ({ pictureUri, setPictureUri }) => {
 
       <View style={styles.preview}>
         <Camera style={styles.camera} ref={setCameraRef}>
-          <Snap onClick={takePicture} />
+          <Snap onClick={takePicture} isLoading={isLoading} />
         </Camera>
         {pictureUri && <PreloadedPicture pictureUri={pictureUri} />}
       </View>

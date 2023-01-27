@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Keyboard, View } from "react-native";
+import { ActivityIndicator, Keyboard, View } from "react-native";
 import * as Location from "expo-location";
 import { Button } from "../../components/UI-kit/Button";
 import { CameraPicture } from "../../components/CameraPicture/Camerapicture";
@@ -9,6 +9,7 @@ import { RemoveButton } from "../../components/UI-kit/RemoveButton";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../redux/auth/authSelector";
 import { addPost } from "../../firebase/addPost";
+import { theme } from "../../constants/theme";
 
 export const CreatePostsScreen = ({ navigation }) => {
   const { userId } = useSelector(selectUser);
@@ -107,7 +108,11 @@ export const CreatePostsScreen = ({ navigation }) => {
           {isLoading ? `Публикуем...` : "Опубликовать"}
         </Button>
       </View>
-      <RemoveButton onClick={() => setPictureUri(null)} />
+      {isLoading ? (
+        <ActivityIndicator size="large" color={theme.colors.accent} />
+      ) : (
+        <RemoveButton onClick={() => setPictureUri(null)} />
+      )}
     </MainContainer>
   );
 };

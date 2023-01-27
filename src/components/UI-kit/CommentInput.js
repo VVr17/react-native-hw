@@ -9,6 +9,7 @@ export const CommentInput = ({
   placeholder,
   onSubmit,
   onInputFocus,
+  isLoading,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -33,7 +34,7 @@ export const CommentInput = ({
         placeholder={placeholder}
         placeholderTextColor={theme.colors.placeholder}
       />
-      <CommentButton onClick={onSubmit} />
+      <CommentButton onClick={onSubmit} isLoading={isLoading} />
     </View>
   );
 };

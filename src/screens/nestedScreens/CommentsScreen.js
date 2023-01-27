@@ -21,11 +21,12 @@ import { db } from "../../firebase/config";
 const dimensions = Dimensions.get("window");
 
 export const CommentsScreen = ({ route: { params } }) => {
+  const { imageUrl, title, postId } = params;
   const { login: userLogin, avatarUrl: userAvatar } = useSelector(selectUser);
   const [isKeyboardShown, setIsKeyboardShown] = useState(false);
-  const { imageUrl, title, postId } = params;
   const [currentComment, setCurrentComment] = useState(null);
   const [allComments, setAllComments] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getComments = () => {
     const postRef = doc(db, "posts", postId); // find post
@@ -50,7 +51,10 @@ export const CommentsScreen = ({ route: { params } }) => {
   };
 
   const onSubmit = async () => {
+    if (isLoading) return;
     if (!currentComment) return;
+
+    setIsLoading(true);
 
     await addComment({
       postId,
@@ -59,6 +63,7 @@ export const CommentsScreen = ({ route: { params } }) => {
       comment: currentComment,
     });
 
+    setIsLoading(false);
     hideKeyboard();
     setCurrentComment(null);
   };
@@ -102,6 +107,7 @@ export const CommentsScreen = ({ route: { params } }) => {
         value={currentComment}
         placeholder="Комментировать..."
         onSubmit={onSubmit}
+        isLoading={isLoading}
       />
     </MainContainer>
   );
